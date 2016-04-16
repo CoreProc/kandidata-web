@@ -158,6 +158,7 @@ return [
 
         Thujohn\Twitter\TwitterServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        Toin0u\Geotools\GeotoolsServiceProvider::class
     ],
 
     /*
@@ -205,6 +206,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Twitter' => Thujohn\Twitter\Facades\Twitter::class,
+        'Geotools' => Toin0u\Geotools\Facade\Geotools::class,
     ],
 
 ];

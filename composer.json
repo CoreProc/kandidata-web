@@ -10,7 +10,8 @@
         "thujohn/twitter": "^2.2",
         "guzzlehttp/guzzle": "^6.2",
         "barryvdh/laravel-ide-helper": "^2.1",
-        "predis/predis": "~1.0"
+        "predis/predis": "~1.0",
+        "toin0u/geotools-laravel": "~1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

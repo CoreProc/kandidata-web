@@ -1,7 +1,7 @@
 <?php
 
 
-namespace KandiData\Processors;
+namespace KandiData\Processors\AlchemyAPI;
 
 
 use GuzzleHttp\Client;
@@ -10,7 +10,7 @@ use KandiData\Classes\AlchemyAPI\TextFeels;
 /**
  * Class GetFeels
  *
- * @package KandiData\Processors
+ * @package KandiData\Processors\AlchemyAPI
  */
 class GetFeels {
     /**

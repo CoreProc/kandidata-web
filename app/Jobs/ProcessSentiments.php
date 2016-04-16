@@ -2,23 +2,25 @@
 
 namespace KandiData\Jobs;
 
-use KandiData\Jobs\Job;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use KandiData\Processors\AlchemyAPI\GetSentiment;
+use KandiData\Tweet;
 
-class ProcessSentiments extends Job implements ShouldQueue
-{
+class ProcessSentiments extends Job implements ShouldQueue {
     use InteractsWithQueue, SerializesModels;
+
+    protected $tweets;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Tweet $tweets)
     {
-        //
+        $this->tweets = $tweets;
     }
 
     /**
@@ -28,6 +30,14 @@ class ProcessSentiments extends Job implements ShouldQueue
      */
     public function handle()
     {
-        //
+        $this->tweets->whereNull('sentiment')->chunk(100, function ($tweets) {
+            foreach ($tweets as $tweet) {
+                $alz = new GetSentiment($tweet->text);
+
+                $tweet->sentiment       = $alz->result->type;
+                $tweet->sentiment_score = $alz->result->score;
+                $tweet->save();
+            }
+        });
     }
 }
