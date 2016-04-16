@@ -11,12 +11,13 @@ var elixir = require('laravel-elixir');
  |
  */
 
-elixir(function(mix) {
+elixir(function (mix) {
     mix
+        .copy('resources/assets/js/controllers', 'public/assets/js/controllers')
         .scripts([
             'app.config.js',
             'app.routes.js'
         ], 'public/assets/js/app.js')
-        .sass('addon.scss', 'public/assets/css/addon.css')
+        .sass(['animation.scss','addon.scss'], 'public/assets/css/addon.css')
         .sass('main.scss', 'public/assets/css/main.css');
 });

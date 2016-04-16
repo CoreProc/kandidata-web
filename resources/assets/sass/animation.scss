@@ -1,0 +1,22 @@
+/* ANIMATIONS
+============================================================================= */
+@keyframes slideInLeft {
+  from    { transform: translateX(-100%); }
+  to    { transform:translateX(0); }
+}
+
+@keyframes slideOutLeft {
+  from      { transform: translate(0, -100%); }
+  to    { transform:translate(-100%, -100%); }
+}
+
+/* slide in from the right */
+@keyframes slideInRight {
+  from    { transform:translateX(100%); }
+  to    { transform:translateX(0); }
+}
+
+@keyframes slideOutRight {
+  from    { transform:translate(0, -100%); }
+  to    { transform:translate(100%, -100%); }
+}
