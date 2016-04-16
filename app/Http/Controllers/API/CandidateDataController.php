@@ -7,6 +7,7 @@ namespace KandiData\Http\Controllers\API;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use KandiData\Http\Controllers\Controller;
 use KandiData\Keyword;
 use KandiData\Tweet;
@@ -16,12 +17,18 @@ class CandidateDataController extends Controller {
     {
         $dateFrom = new Carbon($request->get('from', '2016-04-16 00:00:00'));
         $dateTo   = new Carbon($request->get('to', Carbon::now()));
-        $period   = $request->get('period', 'MINUTE');
+        $period   = $request->get('period', 'HOUR');
 
         $tweets = DB::table((new Tweet())->getTable())
                     ->select([DB::raw('count(id) as `count`'), DB::raw("$period(tweet_date) as `period`"), 'sentiment'])
                     ->where('candidate_id', $candidate_id)
                     ->whereBetween('tweet_date', [$dateFrom, $dateTo])->groupBy('period')->groupBy('sentiment')->get();
+
+        $colle = new Collection($tweets);
+
+        $colle->each(function($tw) {
+            $tw->value = $tw->count * $tw->sentiment;
+        });
 
         return response($tweets);
     }
