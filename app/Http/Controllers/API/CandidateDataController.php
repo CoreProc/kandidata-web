@@ -6,6 +6,7 @@ namespace KandiData\Http\Controllers\API;
 
 use Carbon\Carbon;
 use DB;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use KandiData\Candidate;
@@ -14,15 +15,26 @@ use KandiData\Keyword;
 use KandiData\Tweet;
 
 class CandidateDataController extends Controller {
-    public function getCandidates() {
+    public function getCandidates()
+    {
         return Candidate::all();
     }
 
     public function getSentiments(Request $request, $candidate_id)
     {
-        $dateFrom = new Carbon($request->get('from', '2016-04-16 00:00:00'));
-        $dateTo   = new Carbon($request->get('to', Carbon::now()));
-        $period   = $request->get('period', 'HOUR');
+        try {
+            $dateFrom = new Carbon($request->get('from'));
+            $dateTo   = new Carbon($request->get('to'));
+        } catch (Exception $e) {
+            $dateFrom = new Carbon('2016-04-15 00:00:00');
+            $dateTo   = Carbon::now();
+        }
+        
+        $period = $request->get('period', 'HOUR');
+
+        $this->validate($request, [
+            'period' => 'in:HOUR,MINUTE,DAY,MONTH,YEAR',
+        ]);
 
         $tweets = DB::table((new Tweet())->getTable())
                     ->select([DB::raw('count(id) as `count`'), DB::raw("$period(tweet_date) as `period`"), 'sentiment'])
@@ -31,7 +43,7 @@ class CandidateDataController extends Controller {
 
         $colle = new Collection($tweets);
 
-        $colle->each(function($tw) {
+        $colle->each(function ($tw) {
             $tw->value = $tw->count * $tw->sentiment;
         });
 
@@ -67,11 +79,12 @@ class CandidateDataController extends Controller {
                           DB::raw('count(id) as `count`'), 'name', 'relevance'
                       ])->where('candidate_id', $candidate_id)->groupBy('name')
                       ->orderBy('count', 'desc')->orderBy('relevance', 'desc')->limit(20)->get();
-        
+
         return response($keywords);
     }
 
-    public function getTweetFeels(Request $request, $candidate_id) {
+    public function getTweetFeels(Request $request, $candidate_id)
+    {
         $feels = $request->get('feels');
 
         $this->validate($request, [
