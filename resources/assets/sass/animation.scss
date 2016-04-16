@@ -1,22 +1,22 @@
 /* ANIMATIONS
 ============================================================================= */
 @keyframes slideInLeft {
-  from    { transform: translateX(-100%); }
-  to    { transform:translateX(0); }
+  from    { transform: translateX(-100%); position: absolute; top: 0; }
+  to    { transform:translateX(0); position: absolute; top: 0; }
 }
 
 @keyframes slideOutLeft {
-  from      { transform: translate(0, -100%); }
-  to    { transform:translate(-100%, -100%); }
+  from      { transform: translateX(0); position: absolute; top: 0; }
+  to    { transform:translateX(-100%); position: absolute; top: 0; opacity:0; }
 }
 
 /* slide in from the right */
 @keyframes slideInRight {
-  from    { transform:translateX(100%); }
-  to    { transform:translateX(0); }
+  from    { transform:translateX(100%); position: absolute; top: 0; }
+  to    { transform:translateX(0); position: absolute; top: 0; }
 }
 
 @keyframes slideOutRight {
-  from    { transform:translate(0, -100%); }
-  to    { transform:translate(100%, -100%); }
+  from    { transform:translateX(0); position: absolute; top: 0; }
+  to    { transform:translateX(100%); position: absolute; top: 0; opacity:0; }
 }

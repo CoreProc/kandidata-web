@@ -3,6 +3,7 @@
 angular
 	.module('kandidata', [
 		'ngAnimate',
+		'angularMoment',
 		'ui.router',
 		'oc.lazyLoad'
 	]);
