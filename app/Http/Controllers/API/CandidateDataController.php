@@ -8,11 +8,16 @@ use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use KandiData\Candidate;
 use KandiData\Http\Controllers\Controller;
 use KandiData\Keyword;
 use KandiData\Tweet;
 
 class CandidateDataController extends Controller {
+    public function getCandidates() {
+        return Candidate::all();
+    }
+
     public function getSentiments(Request $request, $candidate_id)
     {
         $dateFrom = new Carbon($request->get('from', '2016-04-16 00:00:00'));
@@ -64,5 +69,17 @@ class CandidateDataController extends Controller {
                       ->orderBy('count', 'desc')->orderBy('relevance', 'desc')->limit(20)->get();
         
         return response($keywords);
+    }
+
+    public function getTweetFeels(Request $request, $candidate_id) {
+        $feels = $request->get('feels');
+
+        $this->validate($request, [
+            'feels' => 'in:anger,joy,disgust,fear,sadness'
+        ]);
+
+        $tweets = Tweet::orderBy('feels_' . $feels, 'desc')->where('candidate_id', $candidate_id)->limit(5)->get();
+
+        return response($tweets);
     }
 }

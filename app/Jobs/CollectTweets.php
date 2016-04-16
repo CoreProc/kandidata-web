@@ -48,7 +48,7 @@ class CollectTweets extends Job implements ShouldQueue {
 
                 $t = new Tweet($tweet->id, $tweet->text, $loc[0], $loc[1], $tweet->created_at);
 
-                \KandiData\Tweet::create([
+                KandiDataTweet::create([
                     'twitter_ident' => $t->id,
                     'text'          => $t->text,
                     'tweet_date'    => $t->created_at,

@@ -16,7 +16,9 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix' => 'api'], function () {
+    Route::get('candidates', 'API\CandidateDataController@getCandidates');
     Route::get('{id}/sentiments', 'API\CandidateDataController@getSentiments');
     Route::get('{id}/feels', 'API\CandidateDataController@getFeels');
     Route::get('{id}/keywords', 'API\CandidateDataController@getKeywords');
+    Route::get('{id}/tweet-feels', 'API\CandidateDataController@getTweetFeels');
 });
