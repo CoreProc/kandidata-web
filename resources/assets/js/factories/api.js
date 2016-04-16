@@ -19,6 +19,13 @@ angular.module('kandidata')
                 return $http.get(endpoint + id + '/feels');
             };
 
+            api.getKeywords = function (id) {
+                return $http.get(endpoint + id + '/keywords');
+            };
+
+            api.getFeelsTweets = function (id, feels) {
+                return $http.get(endpoint + id + '/tweet-feels');
+            };
             return api;
         }
     ]);
