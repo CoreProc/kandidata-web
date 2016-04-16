@@ -5,7 +5,7 @@ namespace KandiData\Jobs;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use KandiData\Processors\AlchemyAPI\GetSentiment;
+use KandiData\Processors\Azure\GetSentiment;
 use KandiData\Tweet;
 
 class ProcessSentiments extends Job implements ShouldQueue {
@@ -23,17 +23,10 @@ class ProcessSentiments extends Job implements ShouldQueue {
         Tweet::whereNull('sentiment')->chunk(100, function ($tweets) {
             foreach ($tweets as $tweet) {
                 $alz = new GetSentiment($tweet->text);
-                
+
                 $tweet->sentiment       = $alz->result->type;
                 $tweet->sentiment_score = $alz->result->score;
-                
-                if(empty($tweet->sentiment)) {
-                    $alz = new \KandiData\Processors\Azure\GetSentiment($tweet->text);
-                    
-                    $tweet->sentiment       = $alz->result->type;
-                    $tweet->sentiment_score = $alz->result->score;
-                }
-                
+
                 $tweet->save();
             }
         });
