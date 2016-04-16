@@ -13,6 +13,8 @@ var elixir = require('laravel-elixir');
 
 elixir(function (mix) {
     mix
+        .copy('resources/assets/js/services', 'public/assets/js/services')
+        .copy('resources/assets/js/factories', 'public/assets/js/factories')
         .copy('resources/assets/js/controllers', 'public/assets/js/controllers')
         .scripts([
             'app.config.js',

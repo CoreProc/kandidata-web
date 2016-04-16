@@ -37,9 +37,7 @@
 
 <header class="header" x-ng-include="'tpl/sections/header.html'"></header>
 
-<div class="main-wrapper">
-    <div class="@{{ pageClass }}" ui-view></div>
-</div>
+<div class="main-wrapper" ui-view> </div>
 
 <footer class="footer" x-ng-include="'tpl/sections/footer.html'"></footer>
 
