@@ -1,6 +1,5 @@
 body {
-  background-color: rgb(233, 236, 243);
-
+  background-color: #e9ecf3;
   font-family: "Open Sans", sans-serif;
 }
 
@@ -15,6 +14,11 @@ body {
       height: auto;
     }
   }
+}
+
+.main-wrapper {
+  position: relative;
+  min-height: 500px;
 }
 
 .footer {
@@ -66,6 +70,29 @@ body {
   }
 }
 
+.candidate-info {
+  .card {
+    padding: 40px;
+  }
+
+  .avatar {
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-position: top center;
+    width: 250px;
+    height: 250px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: auto;
+  }
+
+  .detail {
+    margin: 20px 0;
+  }
+}
+
 .ng-leave {
   position: relative;
   z-index: 9999;
@@ -78,18 +105,18 @@ body {
 
 .home-page {
   &.ng-enter {
-    animation:slideInLeft 0.5s both ease-out;
+    animation:slideInLeft 0.4s both linear;
   }
   &.ng-leave {
-    animation:slideOutRight 0.5s both ease-out;
+    animation:slideOutRight 0.4s both linear;
   }
 }
 
 .candidate-page {
   &.ng-enter {
-    animation:slideInRight 0.5s both ease-out;
+    animation:slideInRight 0.4s both linear;
   }
   &.ng-leave {
-    animation:slideOutLeft 0.5s both ease-out;
+    animation:slideOutLeft 0.4s both linear;
   }
 }

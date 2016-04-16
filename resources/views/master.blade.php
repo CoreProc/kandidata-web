@@ -25,6 +25,7 @@
     <script src="assets/lib/angular/angular.min.js"></script>
     <script src="assets/lib/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="assets/lib/angular-animate/angular-animate.min.js"></script>
+    <script src="assets/lib/angular-moment/angular-moment.min.js"></script>
     <script src="assets/lib/oclazyload/dist/ocLazyLoad.min.js"></script>
 
     <!-- Project Scripts -->
@@ -34,7 +35,11 @@
 <body>
 
 <header class="header" x-ng-include="'tpl/sections/header.html'"></header>
-<div class="main-wrapper @{{ pageClass }}" ui-view></div>
+
+<div class="main-wrapper">
+    <div class="@{{ pageClass }}" ui-view></div>
+</div>
+
 <footer class="footer" x-ng-include="'tpl/sections/footer.html'"></footer>
 
 </body>
