@@ -5,7 +5,6 @@ namespace KandiData\Processors\AlchemyAPI;
 
 
 use Exception;
-use GuzzleHttp\Client;
 use KandiData\Classes\AlchemyAPI\TextSentiment;
 
 /**
@@ -41,7 +40,7 @@ class GetSentiment {
         try {
             $this->result = new TextSentiment($text, $obj->docSentiment->type, $obj->docSentiment->score);
         } catch (Exception $e) {
-            \Log::alert($e->getMessage());
+            \Log::info($e->getMessage());
             $this->result = new TextSentiment($text, null, 0);
         }
     }

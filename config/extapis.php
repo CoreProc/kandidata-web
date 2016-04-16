@@ -16,5 +16,16 @@ return [
         'api_key' => env('ALCHEMYAPI_API_KEY', '')
     ],
 
+    'alt' => [
+        'azure' => [
+            'base_url' => 'https://api.datamarket.azure.com/amla/text-analytics/GetSentiment',
+            'api_key' => env('AZURE_TEXT_ANALYSIS_API_KEY', '')
+        ],
+        'vivekn' => [
+            'base_url' => 'https://community-sentiment.p.mashape.com/text',
+            'api_key' => env('MASHAPE_API_KEY', '')
+        ]
+    ],
+
     'output' => 'json'
 ];

@@ -26,6 +26,14 @@ class ProcessSentiments extends Job implements ShouldQueue {
                 
                 $tweet->sentiment       = $alz->result->type;
                 $tweet->sentiment_score = $alz->result->score;
+                
+                if(empty($tweet->sentiment)) {
+                    $alz = new \KandiData\Processors\Azure\GetSentiment($tweet->text);
+                    
+                    $tweet->sentiment       = $alz->result->type;
+                    $tweet->sentiment_score = $alz->result->score;
+                }
+                
                 $tweet->save();
             }
         });
