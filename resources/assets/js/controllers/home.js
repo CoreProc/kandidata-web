@@ -11,6 +11,7 @@ angular.module('kandidata')
 
             function initialize() {
                 $rootScope.pageClass = 'home-page';
+                $rootScope.title = 'KandiData | A data-driven Web App for Twitter metrics for the Philippines Election 2016 presidential candidates';
 
                 vm.candidates = session.getCandidates();
 
