@@ -11,6 +11,14 @@ angular.module('kandidata')
                 return $http.get(endpoint + 'candidates');
             };
 
+            api.getSentiment = function (id) {
+                return $http.get(endpoint + id + '/sentiments');
+            };
+
+            api.getFeels = function (id) {
+                return $http.get(endpoint + id + '/feels');
+            };
+
             return api;
         }
     ]);
