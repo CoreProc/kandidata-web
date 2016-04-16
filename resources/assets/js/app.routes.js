@@ -18,7 +18,7 @@ angular.module('kandidata')
                         name: null
                     },
                     controller: 'CandidateController as candidateCtrl',
-                    resolve: loadJs(['assets/js/controllers/candidate.js'])
+                    resolve: loadJs(['assets/js/controllers/candidate.js', 'assets/lib/amcharts/dist/amcharts/serial.js', 'assets/lib/amcharts/dist/amcharts/themes/light.js'])
                 });
 
             $urlRouterProvider.otherwise("/");
