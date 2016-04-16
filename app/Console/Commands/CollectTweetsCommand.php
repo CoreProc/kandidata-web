@@ -43,9 +43,7 @@ class CollectTweetsCommand extends Command {
         $candidates = Candidate::all();
 
         foreach ($candidates as $candidate) {
-            $job = (new CollectTweets($candidate->hashtag . ' OR ' . $candidate->twitter_mention, $candidate->id))
-                ->onQueue('collect_tweets');
-            $this->dispatch($job);
+            $this->dispatch(new CollectTweets($candidate->hashtag . ' OR ' . $candidate->twitter_mention, $candidate->id));
         }
     }
 }
