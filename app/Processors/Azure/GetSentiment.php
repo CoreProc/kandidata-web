@@ -21,7 +21,7 @@ class GetSentiment {
             ],
             'query' => [
                 'text' => $text,
-            ]
+            ],
         ]);
 
         $obj = \GuzzleHttp\json_decode($response->getBody()->getContents());
