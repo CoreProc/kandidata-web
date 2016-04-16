@@ -1,10 +1,9 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
-class CreateTweetsTable extends Migration
-{
+class CreateTweetsTable extends Migration {
     /**
      * Run the migrations.
      *
@@ -13,12 +12,12 @@ class CreateTweetsTable extends Migration
     public function up()
     {
         Schema::create('tweets', function (Blueprint $table) {
-            $table->increments('id');
-            $table->bigInteger('tweet_id');
+            $table->bigIncrements('id');
+            $table->bigInteger('twitter_ident');
             $table->string('text');
-            $table->smallInteger('sentiment');
-            $table->json('feels');
-            $table->json('keywords');
+            $table->smallInteger('sentiment')->nullable();
+            $table->string('sentiment_score')->nullable();
+            $table->json('feels')->nullable();
             $table->string('lat')->nullable();
             $table->string('long')->nullable();
             $table->dateTime('tweet_date');

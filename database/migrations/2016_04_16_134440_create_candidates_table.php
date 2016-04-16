@@ -18,6 +18,9 @@ class CreateCandidatesTable extends Migration
             $table->string('last_name');
             $table->string('middle_name');
             
+            $table->string('hashtag');
+            $table->string('twitter_mention');
+            
             $table->integer('position_id', false, true);
             $table->foreign('position_id')->references('id')->on('positions');
             

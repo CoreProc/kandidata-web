@@ -2,23 +2,29 @@
 
 namespace KandiData\Jobs;
 
-use KandiData\Jobs\Job;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use KandiData\Classes\Twitter\Tweet;
+use KandiData\Tweet as KandiDataTweet;
+use KandiData\Processors\TweetProcessor;
+use Twitter;
 
-class CollectTweets extends Job implements ShouldQueue
-{
+class CollectTweets extends Job implements ShouldQueue {
     use InteractsWithQueue, SerializesModels;
+
+    protected $tag;
+    protected $candidate_id;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($tag, $candidate_id)
     {
-        //
+        $this->tag          = $tag;
+        $this->candidate_id = $candidate_id;
     }
 
     /**
@@ -28,6 +34,31 @@ class CollectTweets extends Job implements ShouldQueue
      */
     public function handle()
     {
-        //
+        $flag = false;
+
+        do {
+            $latest_tweet = KandiDataTweet::orderBy('twitter_ident', 'desc')->first();
+
+            $since_id = isset($latest_tweet) ? $latest_tweet->twitter_ident : '';
+
+            $tweets = Twitter::getSearch(['q' => $this->tag, 'count' => 100, 'since_id' => $since_id]);
+
+            foreach ($tweets->statuses as $tweet) {
+                $loc = TweetProcessor::getLocation($tweet);
+
+                $t = new Tweet($tweet->id, $tweet->text, $loc[0], $loc[1], $tweet->created_at);
+
+                \KandiData\Tweet::create([
+                    'twitter_ident' => $t->id,
+                    'text'          => $t->text,
+                    'tweet_date'    => $t->created_at,
+                    'lat'           => $t->latitude,
+                    'long'          => $t->longitude,
+                    'candidate_id'  => $this->candidate_id
+                ]);
+
+                $flag = !empty($tweet->search_metadata->next_results);
+            }
+        } while ($flag);
     }
 }
