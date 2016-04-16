@@ -4,6 +4,7 @@
 namespace KandiData\Processors\AlchemyAPI;
 
 
+use Exception;
 use GuzzleHttp\Client;
 use KandiData\Classes\AlchemyAPI\TextKeywords;
 
@@ -29,7 +30,7 @@ class GetKeywords {
 
         $response = $client->post(config('extapis.keywords.base_url'), [
             'form_params' => [
-                'api_key'    => config('extapis.keywords.api_key'),
+                'apikey'    => config('extapis.keywords.api_key'),
                 'text'       => $text,
                 'outputMode' => config('extapis.output')
             ]
@@ -37,6 +38,10 @@ class GetKeywords {
 
         $obj = \GuzzleHttp\json_decode($response->getBody()->getContents());
 
-        $this->result = new TextKeywords($text, $obj->keywords);
+        try {
+            $this->result = new TextKeywords($text, $obj->keywords);
+        } catch (Exception $e) {
+            $this->result = new TextKeywords($text, []);
+        }
     }
 }

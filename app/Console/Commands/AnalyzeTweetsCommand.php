@@ -3,10 +3,15 @@
 namespace KandiData\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use KandiData\Jobs\ProcessFeels;
+use KandiData\Jobs\ProcessKeywords;
+use KandiData\Jobs\ProcessSentiments;
 use KandiData\Tweet;
 
 class AnalyzeTweetsCommand extends Command
 {
+    use DispatchesJobs;
     /**
      * The name and signature of the console command.
      *
@@ -38,6 +43,8 @@ class AnalyzeTweetsCommand extends Command
      */
     public function handle()
     {
-        
+        $this->dispatch(new ProcessSentiments);
+        $this->dispatch(new ProcessFeels);
+        $this->dispatch(new ProcessKeywords);
     }
 }

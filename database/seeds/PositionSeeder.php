@@ -12,8 +12,6 @@ class PositionSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('positions')->truncate();
-
         $positions = ['President'];
 
         foreach ($positions as $position) {

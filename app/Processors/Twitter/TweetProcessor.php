@@ -1,7 +1,7 @@
 <?php
 
 
-namespace KandiData\Processors;
+namespace KandiData\Processors\Twitter;
 
 use Geocoder\Provider\BingMaps;
 use Geocoder\Provider\Chain;
@@ -43,7 +43,11 @@ class TweetProcessor {
             ]),
         ]);
 
-        $result = $geocoder->geocode($tweet->user->location)->first();
+        try {
+            $result = $geocoder->geocode($tweet->user->location)->first();
+        } catch (\Exception $e) {
+            return null;
+        }
 
         $lt = [$result->getLatitude(), $result->getLongitude()];
 

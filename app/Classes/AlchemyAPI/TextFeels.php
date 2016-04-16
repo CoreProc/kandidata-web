@@ -15,6 +15,7 @@ class TextFeels {
     {
         $this->text    = $text;
         $this->anger   = $anger;
+        $this->joy     = $joy;
         $this->disgust = $disgust;
         $this->fear    = $fear;
         $this->sadness = $sadness;

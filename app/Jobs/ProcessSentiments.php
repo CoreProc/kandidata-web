@@ -14,26 +14,16 @@ class ProcessSentiments extends Job implements ShouldQueue {
     protected $tweets;
 
     /**
-     * Create a new job instance.
-     *
-     * @return void
-     */
-    public function __construct(Tweet $tweets)
-    {
-        $this->tweets = $tweets;
-    }
-
-    /**
      * Execute the job.
      *
      * @return void
      */
     public function handle()
     {
-        $this->tweets->whereNull('sentiment')->chunk(100, function ($tweets) {
+        Tweet::whereNull('sentiment')->chunk(100, function ($tweets) {
             foreach ($tweets as $tweet) {
                 $alz = new GetSentiment($tweet->text);
-
+                
                 $tweet->sentiment       = $alz->result->type;
                 $tweet->sentiment_score = $alz->result->score;
                 $tweet->save();
