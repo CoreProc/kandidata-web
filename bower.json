@@ -20,6 +20,7 @@
     "angular": "1.*",
     "angular-ui-router": "*",
     "jquery": "*",
-    "bootstrap": "3.*"
+    "bootstrap": "3.*",
+    "oclazyload": "~1.0.9"
   }
 }
