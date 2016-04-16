@@ -1,20 +1,17 @@
 <div class="candidate-info">
     <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card">
+        <div class="card">
+            <div class="row">
+                <div class="col-md-4">
                     <div class="avatar" x-ng-if="!!$stateParams.name"
                          style="background-image: url('assets/img/{{ $stateParams.name }}-front.png');"></div>
-
-                    <div class="details text-center">
-                        <div class="detail">
-                            <strong>Full Name</strong>
-                            <p>{{ $stateParams.name }}</p>
-                        </div>
-                        <div class="detail">
-                            <strong>Nick Name</strong>
-                            <p>{{ $stateParams.name }}</p>
-                        </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="details">
+                            <div class="detail">
+                                <strong>Full Name</strong>
+                                <p>{{ candidateCtrl.candidate[$stateParams.id - 1].first_name + ' ' + candidateCtrl.candidate[$stateParams.id - 1].middle_name + ' ' + candidateCtrl.candidate[$stateParams.id - 1].last_name }}</p>
+                            </div>
                         <div class="detail">
                             <strong>Biography</strong>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus risus ipsum, tincidunt
@@ -24,68 +21,28 @@
                                 iaculis at vel augue. Phasellus lacinia massa vel nisl viverra, at luctus mauris
                                 consectetur. Cras eu commodo ipsum. Pellentesque eu lectus nec felis faucibus
                                 dictum.</p>
-
-                            <p>Aenean eleifend, nulla eu facilisis feugiat, diam nisi tempus elit, non ultrices odio
-                                nulla non lectus. Duis eleifend magna a gravida fermentum. Aenean efficitur euismod
-                                sapien nec vulputate. Quisque at urna nec velit venenatis tempus. In hac habitasse
-                                platea dictumst. Phasellus rutrum molestie felis, vestibulum fringilla leo tempus in.
-                                Etiam eu pulvinar lorem, a sodales velit. Integer sed iaculis sem, vitae dictum ante.
-                                Curabitur pretium mi urna, eu imperdiet dolor bibendum at. Duis arcu metus, ornare eget
-                                venenatis eu, consectetur ac elit. Sed accumsan justo risus, vitae feugiat justo
-                                tristique in. Donec faucibus rhoncus ultrices. Fusce sit amet lectus accumsan, fermentum
-                                elit ac, bibendum eros.</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-8">
+        </div>
+
+        <div class="card">
+            <div id="sentiment" style="height: 300px; width: 100%;"></div>
+            <h3 class="text-center">Sentiment Visualization</h3>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
                 <div class="card">
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
+                    <div id="emotions" style="height: 300px; width: 100%;"></div>
+                    <h3 class="text-center">Emotions</h3>
                 </div>
+            </div>
+            <div class="col-md-6">
                 <div class="card">
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                </div>
-                <div class="card">
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                </div>
-                <div class="card">
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
+                    <div id="top_tweets" style="height: 300px; width: 100%;"></div>
+                    <h3 class="text-center">Top Tweets</h3>
                 </div>
             </div>
         </div>

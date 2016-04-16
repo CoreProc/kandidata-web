@@ -5,20 +5,43 @@ angular.module('kandidata')
         '$urlRouterProvider',
         function ($stateProvider, $urlRouterProvider) {
             $stateProvider
+                .state('app', {
+                    abstract: true,
+                    templateUrl: 'tpl/sections/main.html',
+                    controller: 'AppController as appCtrl',
+                    resolve: loadJs([
+                        'assets/js/controllers/app.js',
+                        'assets/js/services/session.js',
+                        'assets/js/factories/api.js'
+                    ])
+                })
                 .state('home', {
+                    parent: 'app',
                     url: '/',
                     templateUrl: 'tpl/home.html',
                     controller: 'HomeController as homeCtrl',
-                    resolve: loadJs(['assets/js/controllers/home.js'])
+                    resolve: loadJs([
+                        'assets/js/controllers/home.js',
+                        'assets/js/services/session.js',
+                        'assets/js/factories/api.js'
+                    ])
                 })
                 .state('candidates', {
+                    parent: 'app',
                     url: '/candidate/:name/',
                     templateUrl: 'tpl/candidate.html',
                     params: {
+                        id: null,
                         name: null
                     },
                     controller: 'CandidateController as candidateCtrl',
-                    resolve: loadJs(['assets/js/controllers/candidate.js', 'assets/lib/amcharts/dist/amcharts/serial.js', 'assets/lib/amcharts/dist/amcharts/themes/light.js'])
+                    resolve: loadJs([
+                        'assets/js/controllers/candidate.js',
+                        'assets/js/services/session.js',
+                        'assets/js/factories/api.js',
+                        'assets/lib/amcharts/dist/amcharts/serial.js',
+                        'assets/lib/amcharts/dist/amcharts/themes/light.js'
+                    ])
                 });
 
             $urlRouterProvider.otherwise("/");
