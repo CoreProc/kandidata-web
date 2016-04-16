@@ -15,33 +15,27 @@ class ProcessKeywords extends Job implements ShouldQueue {
     protected $tweets;
 
     /**
-     * Create a new job instance.
-     *
-     * @return void
-     */
-    public function __construct(Tweet $tweets)
-    {
-        $this->tweets = $tweets;
-    }
-
-    /**
      * Execute the job.
      *
      * @return void
      */
     public function handle()
     {
-        $this->tweets->doesntHave('keywords')->chunk(100, function ($tweets) {
+        Tweet::doesntHave('keywords')->chunk(100, function ($tweets) {
             foreach ($tweets as $tweet) {
                 $alz = new GetKeywords($tweet->text);
 
-                foreach ($alz->result->keywords as $keyword) {
-                    $keyword = new Keyword([
-                        'name'      => $keyword->text,
-                        'relevance' => $keyword->relevance
-                    ]);
+                if (!empty($alz->result->keywords)) {
+                    foreach ($alz->result->keywords as $keyword) {
+                        $key = new Keyword;
+                        $key->fill([
+                            'name'         => $keyword->text,
+                            'relevance'    => $keyword->relevance,
+                            'candidate_id' => $tweet->candidate_id
+                        ]);
 
-                    $tweet->keyword()->save($keyword);
+                        $tweet->keywords()->save($key);
+                    }
                 }
             }
         });

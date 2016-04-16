@@ -1,7 +1,7 @@
 <?php
 
 
-namespace KandiData\Processors;
+namespace KandiData\Processors\Twitter;
 
 use Exception;
 use Twitter;

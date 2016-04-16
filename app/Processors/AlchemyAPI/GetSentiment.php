@@ -4,6 +4,7 @@
 namespace KandiData\Processors\AlchemyAPI;
 
 
+use Exception;
 use GuzzleHttp\Client;
 use KandiData\Classes\AlchemyAPI\TextSentiment;
 
@@ -29,7 +30,7 @@ class GetSentiment {
 
         $response = $client->post(config('extapis.sentiment.base_url'), [
             'form_params' => [
-                'api_key'    => config('extapis.sentiment.api_key'),
+                'apikey'    => config('extapis.sentiment.api_key'),
                 'text'       => $text,
                 'outputMode' => config('extapis.output')
             ]
@@ -37,6 +38,10 @@ class GetSentiment {
 
         $obj = \GuzzleHttp\json_decode($response->getBody()->getContents());
 
-        $this->result = new TextSentiment($text, $obj->docSentiment->type, $obj->docSentiment->score);
+        try {
+            $this->result = new TextSentiment($text, $obj->docSentiment->type, $obj->docSentiment->score);
+        } catch (Exception $e) {
+            $this->result = new TextSentiment($text, 'neutral', 0);
+        }
     }
 }

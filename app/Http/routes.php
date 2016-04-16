@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('master');
 });
+
+Route::group(['prefix' => 'api'], function () {
+    Route::get('{id}/summary', 'API\CandidateDataController@getSentimentSummary');
+    Route::get('{id}/feels', 'API\CandidateDataController@getFeels');
+    Route::get('{id}/keywords', 'API\CandidateDataController@getKeywords');
+});

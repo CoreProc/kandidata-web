@@ -17,7 +17,7 @@ class TextSentiment {
     {
         $this->text = (string)$text;
 
-        switch ($this->type) {
+        switch ($type) {
             case self::POSITIVE:
                 $this->type = 1;
                 break;

@@ -12,15 +12,6 @@ class ProcessFeels extends Job implements ShouldQueue {
     use InteractsWithQueue, SerializesModels;
 
     protected $tweets;
-    /**
-     * Create a new job instance.
-     *
-     * @param \KandiData\Tweet $tweets
-     */
-    public function __construct(Tweet $tweets)
-    {
-        $this->tweets = $tweets;
-    }
 
     /**
      * Execute the job.
@@ -29,16 +20,15 @@ class ProcessFeels extends Job implements ShouldQueue {
      */
     public function handle()
     {
-        $this->tweets->whereNull('feels')->chunk(100, function($tweets) {
+        Tweet::whereNull('feels_anger')->chunk(100, function ($tweets) {
             foreach ($tweets as $tweet) {
                 $alz = new GetFeels($tweet->text);
 
-                $tweet->feels = json_encode([
-                    'anger'   => $alz->result->anger,
-                    'disgust' => $alz->result->disgust,
-                    'fear'    => $alz->result->fear,
-                    'sadness' => $alz->result->sadness,
-                ]);
+                $tweet->feels_anger   = $alz->result->anger;
+                $tweet->feels_disgust = $alz->result->disgust;
+                $tweet->feels_joy     = $alz->result->joy;
+                $tweet->feels_fear    = $alz->result->fear;
+                $tweet->feels_sadness = $alz->result->sadness;
 
                 $tweet->save();
             }

@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 use KandiData\Candidate;
+use KandiData\Period;
+use KandiData\Position;
 
 class CandidateSeeder extends Seeder
 {
@@ -12,8 +14,9 @@ class CandidateSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('candidates')->truncate();
-
+        $pos = Position::first();
+        $per = Period::first();
+        
         $candidates = [
             [
                 "first_name" => "Jejomar",
@@ -21,8 +24,8 @@ class CandidateSeeder extends Seeder
                 "middle_name" => "Cabauatan",
                 "hashtag" => "#binay",
                 "twitter_mention" => "@VPJojoBinay",
-                "position_id" => 1,
-                "period_id" => 1
+                "position_id" => $pos->id,
+                "period_id" => $per->id
             ],
             [
                 "first_name" => "Miriam",
@@ -30,8 +33,8 @@ class CandidateSeeder extends Seeder
                 "middle_name" => "Palma",
                 "hashtag" => "#miriam2016",
                 "twitter_mention" => "@senmiriam",
-                "position_id" => 1,
-                "period_id" => 1
+                "position_id" => $pos->id,
+                "period_id" => $per->id
             ],
             [
                 "first_name" => "Rodrigo",
@@ -39,8 +42,8 @@ class CandidateSeeder extends Seeder
                 "middle_name" => "Roa",
                 "hashtag" => "#du30",
                 "twitter_mention" => "@RRD_Davao",
-                "position_id" => 1,
-                "period_id" => 1
+                "position_id" => $pos->id,
+                "period_id" => $per->id
             ],
             [
                 "first_name" => "Mary Grace",
@@ -48,8 +51,8 @@ class CandidateSeeder extends Seeder
                 "middle_name" => "Poe",
                 "hashtag" => "#Grace2016",
                 "twitter_mention" => "@SenGracePOE",
-                "position_id" => 1,
-                "period_id" => 1
+                "position_id" => $pos->id,
+                "period_id" => $per->id
             ],
             [
                 "first_name" => "Manuel",
@@ -57,8 +60,8 @@ class CandidateSeeder extends Seeder
                 "middle_name" => "Araneta",
                 "hashtag" => "#roxas",
                 "twitter_mention" => "@MARoxas",
-                "position_id" => 1,
-                "period_id" => 1
+                "position_id" => $pos->id,
+                "period_id" => $per->id
             ]
         ];
 

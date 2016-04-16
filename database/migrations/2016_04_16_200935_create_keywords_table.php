@@ -14,11 +14,14 @@ class CreateKeywordsTable extends Migration {
         Schema::create('keywords', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('relevance');
+            $table->double('relevance');
             $table->smallInteger('sentiment')->nullable();
 
-            $table->integer('tweet_id', false, true);
+            $table->bigInteger('tweet_id', false, true);
             $table->foreign('tweet_id')->references('id')->on('tweets');
+            
+            $table->integer('candidate_id', false, true);
+            $table->foreign('candidate_id')->references('id')->on('candidates');
             
             $table->timestamps();
         });

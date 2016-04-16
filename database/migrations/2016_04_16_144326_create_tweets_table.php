@@ -13,11 +13,15 @@ class CreateTweetsTable extends Migration {
     {
         Schema::create('tweets', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('twitter_ident');
+            $table->bigInteger('twitter_ident')->index();
             $table->string('text');
             $table->smallInteger('sentiment')->nullable();
-            $table->string('sentiment_score')->nullable();
-            $table->json('feels')->nullable();
+            $table->double('sentiment_score')->nullable();
+            $table->double('feels_anger')->nullable();
+            $table->double('feels_joy')->nullable();
+            $table->double('feels_disgust')->nullable();
+            $table->double('feels_fear')->nullable();
+            $table->double('feels_sadness')->nullable();
             $table->string('lat')->nullable();
             $table->string('long')->nullable();
             $table->dateTime('tweet_date');
