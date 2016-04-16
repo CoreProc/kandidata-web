@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Manila',
 
     /*
     |--------------------------------------------------------------------------
@@ -151,11 +151,13 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        KandiData\Providers\AppServiceProvider::class,
+        KandiData\Providers\AuthServiceProvider::class,
+        KandiData\Providers\EventServiceProvider::class,
+        KandiData\Providers\RouteServiceProvider::class,
 
+        Thujohn\Twitter\TwitterServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
     ],
 
     /*
@@ -202,6 +204,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        'Twitter' => Thujohn\Twitter\Facades\Twitter::class,
     ],
 
 ];
