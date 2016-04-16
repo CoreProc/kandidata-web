@@ -7,9 +7,22 @@ namespace KandiData\Processors;
 use GuzzleHttp\Client;
 use KandiData\Classes\AlchemyAPI\TextFeels;
 
+/**
+ * Class GetFeels
+ *
+ * @package KandiData\Processors
+ */
 class GetFeels {
+    /**
+     * @var \KandiData\Classes\AlchemyAPI\TextFeels
+     */
     public $result;
 
+    /**
+     * GetFeels constructor.
+     *
+     * @param $text
+     */
     public function __construct($text)
     {
         $client = new Client();
@@ -32,6 +45,4 @@ class GetFeels {
             $obj->docEmotions->sadness);
 
     }
-
-
 }
