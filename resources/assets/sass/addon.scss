@@ -1,0 +1,60 @@
+.col-xs-15,
+.col-sm-15,
+.col-md-15,
+.col-lg-15 {
+  position: relative;
+  min-height: 1px;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.col-xs-15 {
+  width: 20%;
+  float: left;
+}
+
+@media (min-width: 768px) {
+  .col-sm-15 {
+    width: 20%;
+    float: left;
+  }
+}
+
+@media (min-width: 992px) {
+  .col-md-15 {
+    width: 20%;
+    float: left;
+  }
+}
+
+@media (min-width: 1200px) {
+  .col-lg-15 {
+    width: 20%;
+    float: left;
+  }
+}
+
+.card {
+  background-color: #fff;
+  -webkit-background-size: cover;
+  background-size: cover;
+  background-position: center center;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 3px 2px 8px 3px #aaa;
+  margin-bottom: 20px;
+  position: relative;
+  display: block;
+  min-height: 350px;
+
+  .card-caption {
+    background-color: #fff;
+    padding: 15px;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    width: 100%;
+  }
+}

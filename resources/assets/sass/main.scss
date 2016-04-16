@@ -1,0 +1,18 @@
+body {
+  background-color: rgb(233, 236, 243);
+
+  font-family: "Open Sans", sans-serif;
+}
+
+.header {
+  .header-brand {
+    display: inline-block;
+    max-width: 275px;
+    padding: 10px;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+}
