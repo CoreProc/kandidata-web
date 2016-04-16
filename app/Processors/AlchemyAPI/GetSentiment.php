@@ -31,7 +31,7 @@ class GetSentiment {
         $response = $client->post(config('extapis.sentiment.base_url'), [
             'form_params' => [
                 'apikey'    => config('extapis.sentiment.api_key'),
-                'text'       => "RT @AlxJst: Duterte is good but Miriam is better and she can even do best despite of her health condition. #BestChoice #MIRIAM2016",
+                'text'       => $text,
                 'outputMode' => config('extapis.output')
             ]
         ]);
