@@ -9,7 +9,7 @@ class TextSentiment {
     const NEGATIVE = 'negative';
     const NEUTRAL  = 'neutral';
 
-    public $type;
+    public $type = null;
     public $score;
     public $text;
 
