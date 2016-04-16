@@ -18,7 +18,8 @@ return [
 
     'alt' => [
         'azure' => [
-            'base_url' => 'https://api.datamarket.azure.com/amla/text-analytics/GetSentiment',
+            'base_url' => 'https://api.datamarket.azure.com/data.ashx/amla/text-analytics/v1/GetSentiment',
+
             'api_key' => env('AZURE_TEXT_ANALYSIS_API_KEY', '')
         ],
         'vivekn' => [
