@@ -8,7 +8,7 @@ class TextSentiment {
     const POSITIVE = 1;
     const NEGATIVE = -1;
 
-    public $type = null;
+    public $type;
     public $score;
     public $text;
 

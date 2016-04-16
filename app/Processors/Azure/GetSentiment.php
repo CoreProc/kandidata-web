@@ -27,7 +27,8 @@ class GetSentiment {
         $obj = \GuzzleHttp\json_decode($response->getBody()->getContents());
 
         try {
-            $this->result = new TextSentiment($text, ($obj->Score > .5) ? 1 : -1, $obj->Score);
+            $type = ($obj->Score > .5) ? 1 : -1;
+            $this->result = new TextSentiment($text, $type, $obj->Score);
         } catch (Exception $e) {
             \Log::info($e->getMessage());
             $this->result = new TextSentiment($text, null, 0);
