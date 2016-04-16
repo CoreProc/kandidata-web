@@ -64,11 +64,11 @@ class CandidateDataController extends Controller {
         $sum = $feels->anger + $feels->joy + $feels->disgust + $feels->fear + $feels->sadness;
 
         return response([
-            'anger'   => round($feels->anger / $sum, 2),
-            'joy'     => round($feels->joy / $sum, 2),
-            'disgust' => round($feels->disgust / $sum, 2),
-            'fear'    => round($feels->fear / $sum, 2),
-            'sadness' => round($feels->sadness / $sum, 2),
+            'anger'   => $sum == 0 ? 0 : round($feels->anger / $sum, 2),
+            'joy'     => $sum == 0 ? 0 : round($feels->joy / $sum, 2),
+            'disgust' => $sum == 0 ? 0 : round($feels->disgust / $sum, 2),
+            'fear'    => $sum == 0 ? 0 : round($feels->fear / $sum, 2),
+            'sadness' => $sum == 0 ? 0 : round($feels->sadness / $sum, 2),
         ]);
     }
 
