@@ -1,7 +1,11 @@
 // App Config
 
 angular
-	.module('kandidata', ['ui.router']);
+	.module('kandidata', [
+		'ngAnimate',
+		'ui.router',
+		'oc.lazyLoad'
+	]);
 
 angular.module('kandidata')
 	.run([
@@ -11,9 +15,5 @@ angular.module('kandidata')
 		function ($rootScope, $state, $stateParams) {
 	        $rootScope.$state = $state;
 	        $rootScope.$stateParams = $stateParams;
-
-	        $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
-	            $rootScope.title = toState.data.title;
-	        });
     	}
     ]);

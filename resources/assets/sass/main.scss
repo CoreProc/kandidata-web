@@ -16,3 +16,80 @@ body {
     }
   }
 }
+
+.footer {
+  background-color: #343b44;
+  padding: 60px 15px;
+  margin-top: 20px;
+
+  .brand-white {
+    max-width: 150px;
+    height: auto;
+    width: 100%;
+  }
+
+  .copyright {
+    margin: 10px 0;
+    color: #fff;
+  }
+}
+
+.candidates-banner {
+  .card {
+    &:hover {
+      .card-caption {
+        opacity: 1;
+      }
+    }
+
+    .card-caption {
+      background-color: rgba(255, 255, 255, 0.7);
+      padding: 15px;
+      bottom: 0;
+      left: 0;
+      position: absolute;
+      width: 100%;
+      opacity: 0;
+      color: #000;
+
+      -webkit-transition: 0.25s opacity ease-in-out;
+      -moz-transition: 0.25s opacity ease-in-out;
+      -ms-transition: 0.25s opacity ease-in-out;
+      -o-transition: 0.25s opacity ease-in-out;
+      transition: 0.25s opacity ease-in-out;
+
+      font: {
+        size: 23px;
+        weight: bold;
+      }
+    }
+  }
+}
+
+.ng-leave {
+  position: relative;
+  z-index: 9999;
+}
+
+.ng-enter {
+  position: relative;
+  z-index: 8888;
+}
+
+.home-page {
+  &.ng-enter {
+    animation:slideInLeft 0.5s both ease-out;
+  }
+  &.ng-leave {
+    animation:slideOutRight 0.5s both ease-out;
+  }
+}
+
+.candidate-page {
+  &.ng-enter {
+    animation:slideInRight 0.5s both ease-out;
+  }
+  &.ng-leave {
+    animation:slideOutLeft 0.5s both ease-out;
+  }
+}
