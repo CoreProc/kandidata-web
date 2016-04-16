@@ -28,6 +28,6 @@ class CollectTweetIds extends Job implements ShouldQueue
      */
     public function handle()
     {
-        //
+        
     }
 }
