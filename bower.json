@@ -21,6 +21,10 @@
     "angular-ui-router": "*",
     "jquery": "*",
     "bootstrap": "3.*",
-    "oclazyload": "~1.0.9"
+    "oclazyload": "~1.0.9",
+    "angular-moment": "~0.10.3"
+  },
+  "resolutions": {
+    "angular": ">=1.2.0"
   }
 }
