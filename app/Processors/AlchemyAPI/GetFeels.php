@@ -46,12 +46,13 @@ class GetFeels {
                 $obj->docEmotions->joy,
                 $obj->docEmotions->sadness);
         } catch (Exception $e) {
+            \Log::alert($e->getMessage());
             $this->result = new TextFeels($text,
-                0,
-                0,
-                0,
-                0,
-                0);
+                null,
+                null,
+                null,
+                null,
+                null);
         }
 
     }

@@ -26,12 +26,12 @@ class GetSentiment {
      */
     public function __construct($text)
     {
-        $client = new Client();
+        $client = new \GuzzleHttp\Client();
 
         $response = $client->post(config('extapis.sentiment.base_url'), [
             'form_params' => [
                 'apikey'    => config('extapis.sentiment.api_key'),
-                'text'       => $text,
+                'text'       => "RT @AlxJst: Duterte is good but Miriam is better and she can even do best despite of her health condition. #BestChoice #MIRIAM2016",
                 'outputMode' => config('extapis.output')
             ]
         ]);
@@ -41,7 +41,8 @@ class GetSentiment {
         try {
             $this->result = new TextSentiment($text, $obj->docSentiment->type, $obj->docSentiment->score);
         } catch (Exception $e) {
-            $this->result = new TextSentiment($text, 'neutral', 0);
+            \Log::alert($e->getMessage());
+            $this->result = new TextSentiment($text, null, 0);
         }
     }
 }

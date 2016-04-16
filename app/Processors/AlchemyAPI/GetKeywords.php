@@ -41,6 +41,7 @@ class GetKeywords {
         try {
             $this->result = new TextKeywords($text, $obj->keywords);
         } catch (Exception $e) {
+            \Log::alert($e->getMessage());
             $this->result = new TextKeywords($text, []);
         }
     }
