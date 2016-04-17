@@ -14,7 +14,7 @@ class GetSentiment {
     {
         $client = new \GuzzleHttp\Client();
 
-        $response = $client->get(config('extapis.alt.azure.base_url'), [
+        $response = $client->get(config('extapis.alt.azure.base_url') . '/GetSentiment', [
             'headers'     => [
                 'Authorization' => 'Basic ' . base64_encode('AccountKey:' . config('extapis.alt.azure.api_key')),
                 'Accept'        => 'application/json'
