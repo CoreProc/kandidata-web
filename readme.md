@@ -6,14 +6,16 @@ Built with love, Starbucks coffee, RedBull, Coke, and Amber's.
 
 ## API Usage
 
-You can access our API so you can do the analysis yourself by using the following endpoints:
+You can access our API (output is in `json`) so you can do the analysis yourself by using the following endpoints:
 
 *GET api/candidates*
 - collection of candidates.
 
 
 *GET api/tweets*
-- collection of tweets, paginated, and sorted by `tweet_date` in descending order. By default, this endpoint will only show tweets with sentiment, keyword, and emotional data. Include key `all=1` so you can pull all the tweets even without them. 
+- collection of tweets, paginated, and sorted by `tweet_date` in descending order. By default, this endpoint will only show tweets with sentiment, keyword, and emotional data. Include key `all=1` so you can pull all the tweets even without them.
+ 
+ Please note that the API doesn't require authentication but it throttles requests by 60 requests per minute.
 
 ## License
 
