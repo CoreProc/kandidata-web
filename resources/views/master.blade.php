@@ -14,6 +14,7 @@
 
     <!-- Plugin Stylesheets -->
     <link rel="stylesheet" href="assets/lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/lib/font-awesome/css/font-awesome.min.css">
 
     <!-- Project Stylesheets -->
     <link rel="stylesheet" href="assets/css/addon.css">
