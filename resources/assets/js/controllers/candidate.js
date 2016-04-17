@@ -9,7 +9,8 @@ angular.module('kandidata')
         'session',
         'api',
         '$sce',
-        function ($rootScope, $scope, $stateParams, $state, session, api, $sce) {
+        '$timeout',
+        function ($rootScope, $scope, $stateParams, $state, session, api, $sce, $timeout) {
             var vm = this;
 
             vm.candidates = ['binay', 'santiago', 'duterte', 'poe', 'roxas'];
@@ -181,6 +182,20 @@ angular.module('kandidata')
                                 $('a[title="JavaScript charts"]').remove();
 
                             }, 300);
+
+                            $timeout(function() {
+                                $('.sparkline').each(function() {
+                                    var $this = $(this);
+
+                                    $this
+                                        .css('display','inline-block')
+                                        .css('float','right');
+                                    $this.sparkline($this.data('val'), {
+                                        type: 'pie',
+                                        height: 50
+                                    });
+                                });
+                            }, 1000);
                         }
 
                     });

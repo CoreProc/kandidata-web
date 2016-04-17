@@ -39,6 +39,7 @@ angular.module('kandidata')
                         'assets/js/controllers/candidate.js',
                         'assets/js/services/session.js',
                         'assets/js/factories/api.js',
+                        'assets/lib/jquery-sparkline/dist/jquery.sparkline.min.js',
                         'assets/lib/amcharts/dist/amcharts/pie.js',
                         'assets/lib/amcharts/dist/amcharts/serial.js',
                         'assets/lib/amcharts/dist/amcharts/themes/light.js'

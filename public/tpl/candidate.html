@@ -68,6 +68,7 @@
                             <div id="feelsGroup{{ $index }}" class="panel-collapse collapse {{ $index == 90 ? 'in' :'' }}" role="tabpanel" aria-labelledby="feelsGroup{{ $index }}">
                                 <ul class="list-group">
                                     <li class="list-group-item" x-ng-repeat="tweet in feel.tweets">
+                                        <span class="sparkline" data-val="[{{ tweet.feels_anger }}, {{ tweet.feels_disgust }}, {{ tweet.feels_fear }}, {{ tweet.feels_joy }}, {{ tweet.feels_sadness }}]"></span>
                                         <a href="https://twitter.com/x/status/{{ tweet.twitter_ident }}" target="_blank" style="color: #000; text-decoration: none;">
                                             <span x-ng-bind-html="candidateCtrl.tweetContent(tweet)"></span>
                                         </a>
