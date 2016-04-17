@@ -14,25 +14,24 @@
                             </div>
                         <div class="detail">
                             <strong>Biography</strong>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus risus ipsum, tincidunt
-                                feugiat mattis in, volutpat id sapien. Maecenas eget dui rutrum, facilisis nisi quis,
-                                suscipit odio. Curabitur vehicula dolor sit amet mauris molestie aliquet. Morbi posuere
-                                mattis nibh. Fusce congue lobortis ipsum at porta. Aliquam quis purus nec ex fermentum
-                                iaculis at vel augue. Phasellus lacinia massa vel nisl viverra, at luctus mauris
-                                consectetur. Cras eu commodo ipsum. Pellentesque eu lectus nec felis faucibus
-                                dictum.</p>
+                            <p x-ng-bind="candidateCtrl.candidatesDescription[$stateParams.name]"></p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="card">
+        <div class="card" x-ng-if="candidateCtrl.sentimentsReady">
             <div id="sentiment" style="height: 300px; width: 100%;"></div>
             <h3 class="text-center">Sentiment Visualization</h3>
         </div>
 
-        <div class="row">
+        <div class="card" x-ng-if="candidateCtrl.keywordsReady">
+            <div id="keywords" style="height: 300px; width: 100%;"></div>
+            <h3 class="text-center">Top Keywords</h3>
+        </div>
+
+        <div class="row" x-ng-if="candidateCtrl.feelsReady">
             <div class="col-md-6">
                 <div class="card">
                     <div id="emotions" style="height: 300px; width: 100%;"></div>
@@ -41,8 +40,23 @@
             </div>
             <div class="col-md-6">
                 <div class="card">
-                    <div id="keywords" style="height: 300px; width: 100%;"></div>
-                    <h3 class="text-center">Top Keywords</h3>
+                    <div class="panel-group" id="em_accordion" role="tablist" aria-multiselectable="true">
+                        <div class="panel panel-default" x-ng-repeat="feel in candidateCtrl.feels">
+                            <div class="panel-heading" role="tab" id="feelsHeading{{ $index }}">
+                                <h4 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#em_accordion" href="#feelsGroup{{ $index }}" aria-expanded="{{ $index == 0 }}" aria-controls="feelsGroup{{ $index }}" onclick="return false">
+                                        <strong>{{ feel.feels }}</strong>
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="feelsGroup{{ $index }}" class="panel-collapse collapse {{ $index == 90 ? 'in' :'' }}" role="tabpanel" aria-labelledby="feelsGroup{{ $index }}">
+                                <ul class="list-group">
+                                    <li class="list-group-item" x-ng-repeat="tweet in feel.tweets" x-ng-bind-html="candidateCtrl.sceSafe(tweet.text)"></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="text-center">Top 5 Tweets per Emotions</h3>
                 </div>
             </div>
         </div>
