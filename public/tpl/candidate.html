@@ -1,8 +1,10 @@
 <div class="container">
-    <ol class="breadcrumb">
-        <li><i class="fa fa-home"></i> <a x-ui-sref="home">Home</a></li>
-        <li class="active text-capitalize"><i class="fa fa-user-secret"></i> Candidate: {{ $stateParams.name }}</li>
-    </ol>
+    <div class="breadcrumb" style="padding-left: 0; padding-right: 0;">
+        <ol class="breadcrumb" style="margin-bottom: 0;">
+            <li><i class="fa fa-home"></i> <a x-ui-sref="home">Home</a></li>
+            <li class="active text-capitalize"><i class="fa fa-user-secret"></i> Candidate: {{ $stateParams.name }}</li>
+        </ol>
+    </div>
 </div>
 
 <div class="candidate-info">
