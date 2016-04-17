@@ -26,6 +26,7 @@
     <script src="assets/lib/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="assets/lib/angular-animate/angular-animate.min.js"></script>
     <script src="assets/lib/angular-moment/angular-moment.min.js"></script>
+    <script src="assets/lib/moment/min/moment.min.js"></script>
     <script src="assets/lib/amcharts/dist/amcharts/amcharts.js"></script>
     <script src="assets/lib/oclazyload/dist/ocLazyLoad.min.js"></script>
 
