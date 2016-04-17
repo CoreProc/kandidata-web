@@ -18,6 +18,42 @@ body {
   }
 }
 
+.scroll-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+
+  opacity: 0;
+
+  -webkit-transition: opacity 0.25s ease-in;
+  -moz-transition: opacity 0.25s ease-in;
+  -ms-transition: opacity 0.25s ease-in;
+  -o-transition: opacity 0.25s ease-in;
+  transition: opacity 0.25s ease-in;
+
+  &.show {
+    opacity: 0.7;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  a {
+    background-color: rgba(0,0,0,0.7);
+    color: #fff;
+    display: block;
+
+    padding: 15px 20px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+
+    width: 50px;
+    text-align: center;
+  }
+}
+
 .main-wrapper {
   position: relative;
   min-height: 425px;

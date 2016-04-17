@@ -43,5 +43,34 @@
 
 <footer class="footer" x-ng-include="'tpl/sections/footer.html'"></footer>
 
+<div class="scroll-top">
+    <a href="#">
+        <i class="fa fa-caret-up"></i>
+    </a>
+</div>
+
+<script>
+    $(function() {
+        $('.scroll-top a').on('click', function() {
+            var body = $("html, body");
+            body.stop().animate({scrollTop:0}, '500', 'swing', function() {
+                console.log('scroll top clicked');
+            });
+
+            return false;
+        });
+
+        $(window).scroll(function() {
+            var scrollBtn = $('.scroll-top');
+
+            if ($('body').scrollTop() > $('.header').outerHeight()) {
+                scrollBtn.addClass('show');
+            } else {
+                scrollBtn.removeClass('show');
+            }
+        });
+    });
+</script>
+
 </body>
 </html>
