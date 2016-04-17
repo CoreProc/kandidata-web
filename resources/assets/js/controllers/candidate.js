@@ -25,8 +25,9 @@ angular.module('kandidata')
             vm.feelsReady = false;
             vm.keywordsReady = false;
 
-            vm.sceSafe = function(html) {
-                return $sce.trustAsHtml(html);
+            vm.tweetContent = function(tweet) {
+                var tweetDate = new Date(tweet.tweet_date);
+                return $sce.trustAsHtml(tweet.text + '<br><small>' + moment(tweetDate).fromNow() + '</small>');
             };
 
             function initialize() {
@@ -44,7 +45,7 @@ angular.module('kandidata')
             }
 
             function prepareSentiments() {
-                api.getSentiment($stateParams.id)
+                api.getSentiment($stateParams.id, moment().subtract(24, 'hours').format("YYYY-MM-DD, hh:mm:ss"))
                     .then(function (response) {
                         vm.sentiments = response.data;
 
@@ -59,12 +60,13 @@ angular.module('kandidata')
                                     "dataProvider": vm.sentiments,
                                     "valueAxes": [{
                                         "axisAlpha": 1,
+                                        "labelsEnabled": false,
                                         "position": "left"
                                     }],
                                     "graphs": [
                                         {
                                             "id": "g1",
-                                            "balloonText": "<b><span style='font-size:14px;'>[[count]]</span></b>",
+                                            "balloonText": "<b>Tweets<br><span style='font-size:14px;'>[[count]]</span></b>",
                                             "bullet": "round",
                                             "bulletSize": 8,
                                             "tickLength": 1,
@@ -73,7 +75,7 @@ angular.module('kandidata')
                                             "negativeLineColor": "#637bb6",
                                             "type": "smoothedLine",
                                             "minVerticalGap": 1,
-                                            "valueField": "sentiment"
+                                            "valueField": "value"
                                         }
                                     ],
                                     "chartCursor": {
@@ -85,7 +87,7 @@ angular.module('kandidata')
                                         "fullWidth": true
                                     },
                                     "dataDateFormat": "NN",
-                                    "categoryField": "period"
+                                    "categoryField": "period",
                                 });
 
                             }, 300);

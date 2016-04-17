@@ -11,8 +11,8 @@ angular.module('kandidata')
                 return $http.get(endpoint + 'candidates');
             };
 
-            api.getSentiment = function (id) {
-                return $http.get(endpoint + id + '/sentiments');
+            api.getSentiment = function (id, from) {
+                return $http.get(endpoint + id + '/sentiments?from=' + from);
             };
 
             api.getFeels = function (id) {
