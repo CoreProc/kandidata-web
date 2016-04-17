@@ -8,10 +8,26 @@
                 </div>
                 <div class="col-md-8">
                     <div class="details">
-                            <div class="detail">
-                                <strong>Full Name</strong>
-                                <p>{{ candidateCtrl.candidate[$stateParams.id - 1].first_name + ' ' + candidateCtrl.candidate[$stateParams.id - 1].middle_name + ' ' + candidateCtrl.candidate[$stateParams.id - 1].last_name }}</p>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="detail">
+                                    <strong>Full Name</strong>
+                                    <p>{{ candidateCtrl.candidate[$stateParams.id - 1].first_name + ' ' + candidateCtrl.candidate[$stateParams.id - 1].middle_name + ' ' + candidateCtrl.candidate[$stateParams.id - 1].last_name }}</p>
+                                </div>
                             </div>
+                            <div class="col-sm-4">
+                                <div class="detail">
+                                    <strong>Twitter Account</strong>
+                                    <p><a href="https://twitter.com/{{ candidateCtrl.candidate[$stateParams.id - 1].twitter_mention }}" target="_blank">{{ candidateCtrl.candidate[$stateParams.id - 1].twitter_mention }}</a></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="detail">
+                                    <strong>Official Hashtag</strong>
+                                    <p><a href="https://twitter.com/search?q={{ candidateCtrl.candidate[$stateParams.id - 1].hashtag | encodeURIComponent }}" target="_blank">{{ candidateCtrl.candidate[$stateParams.id - 1].hashtag }}</a></p>
+                                </div>
+                            </div>
+                        </div>
                         <div class="detail">
                             <strong>Biography</strong>
                             <p x-ng-bind="candidateCtrl.candidatesDescription[$stateParams.name]"></p>
@@ -23,7 +39,7 @@
 
         <div class="card" x-ng-if="candidateCtrl.sentimentsReady">
             <div id="sentiment" style="height: 300px; width: 100%;"></div>
-            <h3 class="text-center">Sentiment Visualization</h3>
+            <h3 class="text-center">Average Sentiment by time period in Hours</h3>
         </div>
 
         <div class="card" x-ng-if="candidateCtrl.keywordsReady">
@@ -51,7 +67,12 @@
                             </div>
                             <div id="feelsGroup{{ $index }}" class="panel-collapse collapse {{ $index == 90 ? 'in' :'' }}" role="tabpanel" aria-labelledby="feelsGroup{{ $index }}">
                                 <ul class="list-group">
-                                    <li class="list-group-item" x-ng-repeat="tweet in feel.tweets" x-ng-bind-html="candidateCtrl.sceSafe(tweet.text)"></li>
+                                    <li class="list-group-item" x-ng-repeat="tweet in feel.tweets">
+                                        <span class="sparkline" data-val="[{{ tweet.feels_anger }}, {{ tweet.feels_disgust }}, {{ tweet.feels_fear }}, {{ tweet.feels_joy }}, {{ tweet.feels_sadness }}]"></span>
+                                        <a href="https://twitter.com/x/status/{{ tweet.twitter_ident }}" target="_blank" style="color: #000; text-decoration: none;">
+                                            <span x-ng-bind-html="candidateCtrl.tweetContent(tweet)"></span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
