@@ -6,7 +6,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use KandiData\Keyword;
-use KandiData\Processors\AlchemyAPI\GetKeywords;
+use KandiData\Processors\Azure\GetKeywords;
 use KandiData\Tweet;
 
 class ProcessKeywords extends Job implements ShouldQueue {
