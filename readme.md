@@ -18,7 +18,7 @@ You can access our API (output is in `json`) so you can do the analysis yourself
 
 
 *GET api/tweets*
-- collection of tweets, paginated, and sorted by `tweet_date` in descending order. By default, this endpoint will only show tweets with sentiment, keyword, and emotional data. Include key `all=1` so you can pull all the tweets even without them.
+- collection of tweets, paginated, and sorted by `tweet_date` in descending order. By default, this endpoint will only show tweets with sentiment, keyword, and emotional data. Include key `all=1` so you can pull all the tweets even without them. Use the optional parameter `candidate_id` to filter tweets by candidate.
  
  Please note that the API doesn't require authentication but it throttles requests by 60 requests per minute.
 

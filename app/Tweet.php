@@ -18,6 +18,11 @@ class Tweet extends Model {
             ->whereNotNull('feels_sadness')->whereNotNull('feels_disgust')
             ->whereNotNull('feels_fear');
     }
+    
+    public function scopeCandidate($q, $i) {
+        
+        return !empty($i) ? $q->where('candidate_id', $i) : $q;
+    }
 
     public function keywords()
     {
