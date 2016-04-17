@@ -5,7 +5,7 @@ angular.module('kandidata')
         '$http',
         function ($http) {
             var api = this;
-            var endpoint = '/api/';
+            var endpoint = 'http://www.kandidata.tech/api/';
 
             api.getCandidates = function () {
                 return $http.get(endpoint + 'candidates');
@@ -24,7 +24,7 @@ angular.module('kandidata')
             };
 
             api.getFeelsTweets = function (id, feels) {
-                return $http.get(endpoint + id + '/tweet-feels');
+                return $http.get(endpoint + id + '/tweet-feels?feels=' + feels);
             };
             return api;
         }
