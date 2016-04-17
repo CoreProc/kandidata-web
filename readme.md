@@ -4,6 +4,17 @@ A data-driven webapp for Twitter metrics for the Philippines Election 2016 presi
 
 Built with love, Starbucks coffee, RedBull, Coke, and Amber's.
 
+## API Usage
+
+You can access our API so you can do the analysis yourself by using the following endpoints:
+
+*GET api/candidates*
+- collection of candidates.
+
+
+*GET api/tweets*
+- collection of tweets, paginated, and sorted by `tweet_date` in descending order. By default, this endpoint will only show tweets with sentiment, keyword, and emotional data. Include key `all=1` so you can pull all the tweets even without them. 
+
 ## License
 
 Everything is open-source licensed under the [MIT license](http://opensource.org/licenses/MIT).

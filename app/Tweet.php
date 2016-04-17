@@ -11,6 +11,14 @@ class Tweet extends Model {
         'twitter_ident' => 'string'
     ];
 
+    public function scopeWithData($q) {
+        return $q->has('keywords')
+            ->whereNotNull('sentiment')->whereNotNull('sentiment_score')
+            ->whereNotNull('feels_anger')->whereNotNull('feels_joy')
+            ->whereNotNull('feels_sadness')->whereNotNull('feels_disgust')
+            ->whereNotNull('feels_fear');
+    }
+
     public function keywords()
     {
         return $this->hasMany(Keyword::class);
