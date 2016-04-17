@@ -4,6 +4,8 @@ body {
 }
 
 .header {
+  box-shadow: 2px 3px 5px 3px rgba(80,80,80,0.2);
+
   .header-brand {
     display: inline-block;
     max-width: 275px;
@@ -40,6 +42,7 @@ body {
 
 .candidates-banner {
   .card {
+    box-shadow: 3px 5px 7px 3px rgba(80,80,80,0.2);
     min-height: 400px;
     &:hover {
       .card-caption {
@@ -73,9 +76,19 @@ body {
   }
 }
 
+div.breadcrumb {
+  background-color: #fff;
+  box-shadow: 3px 5px 7px 3px rgba(80,80,80,0.2);
+
+  .breadcrumb {
+    background-color: #fff;
+  }
+}
+
 .candidate-info {
   .card {
     padding: 20px;
+    box-shadow: 3px 5px 7px 3px rgba(80,80,80,0.2);
   }
 
   .avatar {
