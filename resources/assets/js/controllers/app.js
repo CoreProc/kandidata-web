@@ -14,9 +14,7 @@ angular.module('kandidata')
                         .then(function (response) {
                            session.storeCandidates(response.data);
                             vm.isReady = true;
-                        }, function() {
-                            alert('An error has occured.');
-                        });
+                        }, function() {});
                 }
             }
 
