@@ -8,10 +8,26 @@
                 </div>
                 <div class="col-md-8">
                     <div class="details">
-                            <div class="detail">
-                                <strong>Full Name</strong>
-                                <p>{{ candidateCtrl.candidate[$stateParams.id - 1].first_name + ' ' + candidateCtrl.candidate[$stateParams.id - 1].middle_name + ' ' + candidateCtrl.candidate[$stateParams.id - 1].last_name }}</p>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="detail">
+                                    <strong>Full Name</strong>
+                                    <p>{{ candidateCtrl.candidate[$stateParams.id - 1].first_name + ' ' + candidateCtrl.candidate[$stateParams.id - 1].middle_name + ' ' + candidateCtrl.candidate[$stateParams.id - 1].last_name }}</p>
+                                </div>
                             </div>
+                            <div class="col-sm-4">
+                                <div class="detail">
+                                    <strong>Twitter Account</strong>
+                                    <p><a href="https://twitter.com/{{ candidateCtrl.candidate[$stateParams.id - 1].twitter_mention }}" target="_blank">{{ candidateCtrl.candidate[$stateParams.id - 1].twitter_mention }}</a></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="detail">
+                                    <strong>Official Hashtag</strong>
+                                    <p><a href="https://twitter.com/search?q={{ candidateCtrl.candidate[$stateParams.id - 1].hashtag | encodeURIComponent }}" target="_blank">{{ candidateCtrl.candidate[$stateParams.id - 1].hashtag }}</a></p>
+                                </div>
+                            </div>
+                        </div>
                         <div class="detail">
                             <strong>Biography</strong>
                             <p x-ng-bind="candidateCtrl.candidatesDescription[$stateParams.name]"></p>
