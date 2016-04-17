@@ -48,8 +48,6 @@ angular.module('kandidata')
                     .then(function (response) {
                         vm.sentiments = response.data;
 
-                        console.log(!!vm.sentiments.length);
-
                         if (!!vm.sentiments.length) {
                             vm.sentimentsReady = true;
 
@@ -102,8 +100,6 @@ angular.module('kandidata')
                 api.getFeels($stateParams.id)
                     .then(function (response) {
                         vm.feels = response.data;
-
-                        console.log(vm.feels);
                         var feels = angular.copy(vm.feels),
                             feelsZero = true;
 
