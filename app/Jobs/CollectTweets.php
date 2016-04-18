@@ -6,8 +6,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use KandiData\Classes\Twitter\Tweet;
-use KandiData\Tweet as KandiDataTweet;
 use KandiData\Processors\Twitter\TweetProcessor;
+use KandiData\Tweet as KandiDataTweet;
 use Twitter;
 
 class CollectTweets extends Job implements ShouldQueue {
@@ -44,18 +44,21 @@ class CollectTweets extends Job implements ShouldQueue {
             $tweets = Twitter::getSearch(['q' => $this->tag, 'count' => 100, 'since_id' => $since_id, 'lang' => 'en']);
 
             foreach ($tweets->statuses as $tweet) {
-                $loc = TweetProcessor::getLocation($tweet);
+                if (!empty($tweet->text)) {
+                    $loc = TweetProcessor::getLocation($tweet);
 
-                $t = new Tweet($tweet->id, $tweet->text, $loc[0], $loc[1], $tweet->created_at);
 
-                KandiDataTweet::create([
-                    'twitter_ident' => $t->id,
-                    'text'          => $t->text,
-                    'tweet_date'    => $t->created_at,
-                    'lat'           => $t->latitude,
-                    'long'          => $t->longitude,
-                    'candidate_id'  => $this->candidate_id
-                ]);
+                    $t = new Tweet($tweet->id, $tweet->text, $loc[0], $loc[1], $tweet->created_at);
+
+                    KandiDataTweet::create([
+                        'twitter_ident' => $t->id,
+                        'text'          => $t->text,
+                        'tweet_date'    => $t->created_at,
+                        'lat'           => $t->latitude,
+                        'long'          => $t->longitude,
+                        'candidate_id'  => $this->candidate_id
+                    ]);
+                }
 
                 $flag = !empty($tweet->search_metadata->next_results);
             }
