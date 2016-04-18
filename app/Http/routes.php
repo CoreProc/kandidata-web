@@ -15,14 +15,11 @@ Route::get('/', function () {
     return view('master');
 });
 
-Route::group(['prefix' => 'api', 'middleware' => 'cors'], function () {
+Route::group(['prefix' => 'api', 'middleware' => ['cors', 'throttle']], function () {
     Route::get('candidates', 'API\CandidateDataController@getCandidates');
     Route::get('{id}/sentiments', 'API\CandidateDataController@getSentiments');
     Route::get('{id}/feels', 'API\CandidateDataController@getFeels');
     Route::get('{id}/keywords', 'API\CandidateDataController@getKeywords');
     Route::get('{id}/tweet-feels', 'API\CandidateDataController@getTweetFeels');
-
-    Route::group(['middleware' => 'throttle'], function() {
-        Route::get('tweets', 'API\TweetsController@index');
-    });
+    Route::get('{id}/tweets', 'API\CandidateDataController@getTweets');
 });
