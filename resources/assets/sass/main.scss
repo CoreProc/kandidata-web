@@ -4,15 +4,53 @@ body {
 }
 
 .header {
+  box-shadow: 2px 3px 5px 3px rgba(80,80,80,0.2);
+
   .header-brand {
     display: inline-block;
     max-width: 275px;
-    padding: 10px;
+    padding: 20px 10px;
 
     img {
       width: 100%;
       height: auto;
     }
+  }
+}
+
+.scroll-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+
+  opacity: 0;
+
+  -webkit-transition: opacity 0.25s ease-in;
+  -moz-transition: opacity 0.25s ease-in;
+  -ms-transition: opacity 0.25s ease-in;
+  -o-transition: opacity 0.25s ease-in;
+  transition: opacity 0.25s ease-in;
+
+  &.show {
+    opacity: 0.7;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  a {
+    background-color: rgba(0,0,0,0.7);
+    color: #fff;
+    display: block;
+
+    padding: 15px 20px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+
+    width: 50px;
+    text-align: center;
   }
 }
 
@@ -40,6 +78,7 @@ body {
 
 .candidates-banner {
   .card {
+    box-shadow: 3px 5px 7px 3px rgba(80,80,80,0.2);
     min-height: 400px;
     &:hover {
       .card-caption {
@@ -73,9 +112,19 @@ body {
   }
 }
 
+div.breadcrumb {
+  background-color: #fff;
+  box-shadow: 3px 5px 7px 3px rgba(80,80,80,0.2);
+
+  .breadcrumb {
+    background-color: #fff;
+  }
+}
+
 .candidate-info {
   .card {
     padding: 20px;
+    box-shadow: 3px 5px 7px 3px rgba(80,80,80,0.2);
   }
 
   .avatar {
