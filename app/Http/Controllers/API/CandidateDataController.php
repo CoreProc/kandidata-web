@@ -118,4 +118,18 @@ class CandidateDataController extends Controller {
 
         return response($tweets);
     }
+
+    public function getTweets(Request $request, $candidate_id)
+    {
+        $sentiment = $request->get('sentiment', 1);
+
+        $this->validate($request, [
+            'sentiment' => 'in:1,-1'
+        ]);
+
+        $tweets = Tweet::withData()->candidate($candidate_id)
+            ->where('sentiment', $sentiment)->orderBy('tweet_date', 'desc')->paginate();
+
+        return response($tweets);
+    }
 }
