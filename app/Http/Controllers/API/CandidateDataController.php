@@ -38,33 +38,36 @@ class CandidateDataController extends Controller {
 
         $tweets = DB::table((new Tweet())->getTable())
                     ->select([DB::raw('count(id) as `count`'), DB::raw("$period(tweet_date) as `period`"), 'sentiment'])
-                    ->where('candidate_id', $candidate_id)->whereNotNull('sentiment')
+                    ->where('candidate_id', $candidate_id)->whereNotNull('sentiment')->where('sentiment', '!=', 0)
                     ->whereBetween('tweet_date', [$dateFrom, $dateTo])->groupBy('period')->groupBy('sentiment')->get();
 
         $colle = new Collection($tweets);
 
+        $colle = $colle->groupBy('period');
+
         $colle->each(function ($tw) {
-            $tw->value = $tw->count * $tw->sentiment;
+            foreach ($tw as $t) {
+                $t->value = $t->count * $t->sentiment;
+            }
         });
 
         $computed = [];
 
         foreach ($colle as $c) {
-            $to_comp = $colle->where('period', $c->period)->where('value', '!=', $c->value)->first();
+            $value  = 0;
+            $period = 0;
 
-            if (empty($to_comp)) {
-                $computed[$c->period] = [
-                    'value'  => $c->value,
-                    'period' => $c->period
-                ];
-            } else {
-                $computed[$c->period] = [
-                    'value'  => $to_comp->value + $c->value,
-                    'period' => $c->period
-                ];
+            foreach ($c as $x) {
+                $value += $x->value;
+                $period = $x->period;
             }
+
+            $computed[$period] = [
+                'value'  => $value,
+                'period' => $period
+            ];
         }
-        
+
         $returned = new Collection(array_values($computed));
 
         return response($returned);
