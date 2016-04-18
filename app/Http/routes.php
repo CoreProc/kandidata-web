@@ -22,4 +22,6 @@ Route::group(['prefix' => 'api', 'middleware' => ['cors', 'throttle']], function
     Route::get('{id}/keywords', 'API\CandidateDataController@getKeywords');
     Route::get('{id}/tweet-feels', 'API\CandidateDataController@getTweetFeels');
     Route::get('{id}/tweets', 'API\CandidateDataController@getTweets');
+
+    Route::get('tweets', 'API\TweetsController@index');
 });
