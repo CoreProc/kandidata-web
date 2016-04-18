@@ -36,7 +36,7 @@ AzureML is pretty generous though for having 10k requests per day for a free tie
 
 If you want to donate, we'll be using that to pay for the APIs (eg, Alchemy) development, and the servers.
 
-Bitcoin: `18rZtMhhTCP8W846s4QgHhFYnFja3SBMmd`
+Bitcoin: `3GMyxShqGDS9Y96k9LpEoxoTTCHvgUSNeE`
 
 ## License
 
