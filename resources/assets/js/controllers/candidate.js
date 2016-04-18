@@ -46,7 +46,7 @@ angular.module('kandidata')
             }
 
             function prepareSentiments() {
-                api.getSentiment($stateParams.id, moment().subtract(24, 'hours').format("YYYY-MM-DD, hh:mm:ss"))
+                api.getSentiment($stateParams.id, moment().subtract(24, 'days').format("YYYY-MM-DD, hh:mm:ss"))
                     .then(function (response) {
                         vm.sentiments = response.data;
 
