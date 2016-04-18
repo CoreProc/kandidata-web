@@ -127,7 +127,7 @@ class CandidateDataController extends Controller {
             'sentiment' => 'in:1,-1'
         ]);
 
-        $tweets = Tweet::withData()->candidate($candidate_id)
+        $tweets = Tweet::withSentiment()->candidate($candidate_id)
             ->where('sentiment', $sentiment)->orderBy('tweet_date', 'desc')->paginate();
 
         return response($tweets);

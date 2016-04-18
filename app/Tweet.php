@@ -19,6 +19,10 @@ class Tweet extends Model {
             ->whereNotNull('feels_fear');
     }
     
+    public function scopeWithSentiment($q) {
+        return $q->whereNotNull('sentiment')->whereNotNull('sentiment_score');
+    }
+    
     public function scopeCandidate($q, $i) {
         
         return !empty($i) ? $q->where('candidate_id', $i) : $q;
