@@ -29,7 +29,7 @@ class CandidateDataController extends Controller {
             $dateFrom = new Carbon('2016-04-15 00:00:00');
             $dateTo   = Carbon::now();
         }
-        
+
         $period = $request->get('period', 'HOUR');
 
         $this->validate($request, [
@@ -38,7 +38,7 @@ class CandidateDataController extends Controller {
 
         $tweets = DB::table((new Tweet())->getTable())
                     ->select([DB::raw('count(id) as `count`'), DB::raw("$period(tweet_date) as `period`"), 'sentiment'])
-                    ->where('candidate_id', $candidate_id)
+                    ->where('candidate_id', $candidate_id)->whereNotNull('sentiment')
                     ->whereBetween('tweet_date', [$dateFrom, $dateTo])->groupBy('period')->groupBy('sentiment')->get();
 
         $colle = new Collection($tweets);
@@ -47,7 +47,27 @@ class CandidateDataController extends Controller {
             $tw->value = $tw->count * $tw->sentiment;
         });
 
-        return response($tweets);
+        $computed = [];
+
+        foreach ($colle as $c) {
+            $to_comp = $colle->where('period', $c->period)->where('value', '!=', $c->value)->first();
+
+            if (empty($to_comp)) {
+                $computed[$c->period] = [
+                    'value'  => $c->value,
+                    'period' => $c->period
+                ];
+            } else {
+                $computed[$c->period] = [
+                    'value'  => $to_comp->value + $c->value,
+                    'period' => $c->period
+                ];
+            }
+        }
+        
+        $returned = new Collection(array_values($computed));
+
+        return response($returned);
     }
 
     public function getFeels($candidate_id)
