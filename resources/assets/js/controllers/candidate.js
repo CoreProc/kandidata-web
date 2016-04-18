@@ -61,7 +61,6 @@ angular.module('kandidata')
                                     "dataProvider": vm.sentiments,
                                     "valueAxes": [{
                                         "axisAlpha": 1,
-                                        "labelsEnabled": false,
                                         "position": "left"
                                     }],
                                     "graphs": [
