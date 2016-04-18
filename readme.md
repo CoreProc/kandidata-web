@@ -16,11 +16,27 @@ You can access our API (output is in `json`) so you can do the analysis yourself
 *GET api/candidates*
 - collection of candidates.
 
-
-*GET api/tweets*
+*GET api/tweets?[all=1,candidate_id={id}]*
 - collection of tweets, paginated, and sorted by `tweet_date` in descending order. By default, this endpoint will only show tweets with sentiment, keyword, and emotional data. Include key `all=1` so you can pull all the tweets even without them. Use the optional parameter `candidate_id` to filter tweets by candidate.
+
+*GET api/{candidate_id}/sentiments?[from={Y-m-d H:i:s},to={Y-m-d H:i:s}*
+- collection of computed sentimental data points (positive minus negative) per hour-period by time-range
+
+*GET api/{candidate_id}/tweets?[sentiment={1,-1}]*
+- collection of tweets with sentiment data, paginated, and sorted by `tweet_date` in descending order by candidate.
  
- Please note that the API doesn't require authentication but it throttles requests by 60 requests per minute.
+Please note that the API doesn't require authentication but it throttles requests by 60 requests per minute.
+ 
+## Additional notes
+
+Emotional analysis for recent tweets are unavailable due to our account at AlchemyAPI hitting the rate limit. We're probably banned by now because we've used multiple api keys (which violates the TOS) in an attempt to have it work for more requests but yeah. We can't pay for the service at the moment so we'll have it sorted out sometime.
+AzureML is pretty generous though for having 10k requests per day for a free tier service, but we can't be so sure about how long will that last with the fact that there are just so many tweets pertaining to the presidentiables for the  2016 Philippine Election. 
+
+## Donations?
+
+If you want to donate, we'll be using that to pay for the APIs (eg, Alchemy) development, and the servers.
+
+Bitcoin: `18rZtMhhTCP8W846s4QgHhFYnFja3SBMmd`
 
 ## License
 
