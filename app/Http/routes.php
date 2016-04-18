@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('master');
 });
 
-Route::group(['prefix' => 'api', 'middleware' => 'cors|throttle'], function () {
+Route::group(['prefix' => 'api', 'middleware' => ['cors', 'throttle']], function () {
     Route::get('candidates', 'API\CandidateDataController@getCandidates');
     Route::get('{id}/sentiments', 'API\CandidateDataController@getSentiments');
     Route::get('{id}/feels', 'API\CandidateDataController@getFeels');
