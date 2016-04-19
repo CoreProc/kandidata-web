@@ -27,7 +27,7 @@ class Kernel extends ConsoleKernel {
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('kandidata:tweet-collector')->withoutOverlapping()
-                  ->hourly();
+                  ->everyTenMinutes();
 
         $schedule->command('kandidata:tweet-analyzer')->withoutOverlapping()
             ->everyThirtyMinutes();
