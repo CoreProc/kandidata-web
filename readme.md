@@ -29,8 +29,7 @@ Please note that the API doesn't require authentication but it throttles request
  
 ## Additional notes
 
-Emotional analysis for recent tweets are unavailable due to our account at AlchemyAPI hitting the rate limit. We're probably banned by now because we've used multiple api keys (which violates the TOS) in an attempt to have it work for more requests but yeah. We can't pay for the service at the moment so we'll have it sorted out sometime.
-AzureML is pretty generous though for having 10k requests per day for a free tier service, but we can't be so sure about how long will that last with the fact that there are just so many tweets pertaining to the presidentiables for the  2016 Philippine Election. 
+Many thanks for AlchemyAPI for approving our request to increase our API limits (we're now at 30K/day). *bumpfist* 
 
 ## Donations?
 
