@@ -29,7 +29,7 @@ class GetSentiment {
 
         $response = $client->post(config('extapis.sentiment.base_url'), [
             'form_params' => [
-                'apikey'    => config('extapis.sentiment.api_key'),
+                'apikey'     => config('extapis.sentiment.api_key'),
                 'text'       => $text,
                 'outputMode' => config('extapis.output')
             ]
@@ -38,7 +38,11 @@ class GetSentiment {
         $obj = \GuzzleHttp\json_decode($response->getBody()->getContents());
 
         try {
-            $this->result = new TextSentiment($text, $obj->docSentiment->type, $obj->docSentiment->score);
+            if ($obj->docSentiment->type != TextSentiment::NEUTRAL) {
+                $this->result = new TextSentiment($text, $obj->docSentiment->type, $obj->docSentiment->score);
+            } else {
+                $this->result = new TextSentiment($text, 0, 0);   
+            }
         } catch (Exception $e) {
             \Log::info($e->getMessage());
             $this->result = new TextSentiment($text, null, 0);

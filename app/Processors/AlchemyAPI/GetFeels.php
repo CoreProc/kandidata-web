@@ -39,12 +39,21 @@ class GetFeels {
         $obj = \GuzzleHttp\json_decode($response->getBody()->getContents());
 
         try {
-            $this->result = new TextFeels($text,
-                $obj->docEmotions->anger,
-                $obj->docEmotions->disgust,
-                $obj->docEmotions->fear,
-                $obj->docEmotions->joy,
-                $obj->docEmotions->sadness);
+            if ($obj->status != 'ERROR') {
+                $this->result = new TextFeels($text,
+                    $obj->docEmotions->anger,
+                    $obj->docEmotions->disgust,
+                    $obj->docEmotions->fear,
+                    $obj->docEmotions->joy,
+                    $obj->docEmotions->sadness);
+            } else {
+                $this->result = new TextFeels($text,
+                   0,
+                   0,
+                   0,
+                   0,
+                   0);
+            }
         } catch (Exception $e) {
             \Log::alert($e->getMessage());
             $this->result = new TextFeels($text,
