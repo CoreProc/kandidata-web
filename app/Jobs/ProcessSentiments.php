@@ -5,7 +5,7 @@ namespace KandiData\Jobs;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use KandiData\Processors\Azure\GetSentiment;
+use KandiData\Processors\AlchemyAPI\GetSentiment;
 use KandiData\Tweet;
 
 class ProcessSentiments extends Job implements ShouldQueue {
