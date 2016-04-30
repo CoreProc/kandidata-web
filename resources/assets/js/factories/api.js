@@ -26,6 +26,10 @@ angular.module('kandidata')
             api.getFeelsTweets = function (id, feels) {
                 return $http.get(endpoint + id + '/tweet-feels?feels=' + feels);
             };
+
+            api.getTweets = function (id) {
+                return $http.get(endpoint + 'tweets?candidate_id=' + id);
+            };
             return api;
         }
     ]);

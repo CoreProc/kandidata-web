@@ -18,7 +18,9 @@
                 </div>
                 <div class="col-md-8">
                     <div class="details">
-                        <h2>{{ candidateCtrl.candidate[$stateParams.id - 1].first_name + ' ' + candidateCtrl.candidate[$stateParams.id - 1].middle_name + ' ' + candidateCtrl.candidate[$stateParams.id - 1].last_name }}</h2>
+                        <h2>{{ candidateCtrl.candidate[$stateParams.id - 1].first_name + ' ' +
+                            candidateCtrl.candidate[$stateParams.id - 1].middle_name + ' ' +
+                            candidateCtrl.candidate[$stateParams.id - 1].last_name }}</h2>
                         <div class="detail">
                             <p x-ng-bind="candidateCtrl.candidatesDescription[$stateParams.name]"></p>
                         </div>
@@ -26,13 +28,19 @@
                             <div class="col-sm-6">
                                 <div class="detail">
                                     <strong><i class="fa fa-twitter"></i> Official Account</strong>
-                                    <p><a href="https://twitter.com/{{ candidateCtrl.candidate[$stateParams.id - 1].twitter_mention }}" target="_blank">{{ candidateCtrl.candidate[$stateParams.id - 1].twitter_mention }}</a></p>
+                                    <p>
+                                        <a href="https://twitter.com/{{ candidateCtrl.candidate[$stateParams.id - 1].twitter_mention }}"
+                                           target="_blank">{{ candidateCtrl.candidate[$stateParams.id -
+                                            1].twitter_mention }}</a></p>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="detail">
                                     <strong><i class="fa fa-hashtag"></i> Official Hashtag</strong>
-                                    <p><a href="https://twitter.com/search?q={{ candidateCtrl.candidate[$stateParams.id - 1].hashtag | encodeURIComponent }}" target="_blank">{{ candidateCtrl.candidate[$stateParams.id - 1].hashtag }}</a></p>
+                                    <p>
+                                        <a href="https://twitter.com/search?q={{ candidateCtrl.candidate[$stateParams.id - 1].hashtag | encodeURIComponent }}"
+                                           target="_blank">{{ candidateCtrl.candidate[$stateParams.id - 1].hashtag
+                                            }}</a></p>
                                 </div>
                             </div>
 
@@ -43,38 +51,74 @@
         </div>
 
         <div class="card" x-ng-if="candidateCtrl.sentimentsReady">
-            <div id="sentiment" style="height: 300px; width: 100%;"></div>
-            <h3 class="text-center">Average Sentiment by time period in Hours</h3>
-        </div>
-
-        <div class="card" x-ng-if="candidateCtrl.keywordsReady">
-            <div id="keywords" style="height: 300px; width: 100%;"></div>
-            <h3 class="text-center">Top Keywords</h3>
-        </div>
-
-        <div class="row" x-ng-if="candidateCtrl.feelsReady">
-            <div class="col-md-6">
-                <div class="card">
-                    <div id="emotions" style="height: 300px; width: 100%;"></div>
-                    <h3 class="text-center">Emotions Chart</h3>
+            <div class="row">
+                <div class="col-sm-8">
+                    <div id="sentiment" style="min-height: 300px; width: 100%;"></div>
+                    <h3 class="text-center">Average Sentiment by time period in Hours</h3>
+                </div>
+                <div class="col-sm-4">
+                    <div class="well">
+                        <h4 class="text-center">Compare to other Candidates</h4>
+                        <ul class="list-unstyled">
+                            <li x-ng-repeat="candidate in candidateCtrl.candidate"
+                                x-ng-if="$stateParams.id != candidate.id">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="candidate_compare" value="{{ candidate.id }}"> {{
+                                    candidate.first_name + ' ' + candidate.middle_name + ' ' + candidate.last_name }}
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
+        </div>
+
+        <div class="row">
             <div class="col-md-6">
+                <div class="card" x-ng-if="candidateCtrl.keywordsReady">
+                    <div id="keywords" style="min-height: 300px; width: 100%;"></div>
+                    <h3 class="text-center">Top Keywords</h3>
+                </div>
+                <div class="card" x-ng-if="candidateCtrl.tweetsReady">
+                    <div id="latest-tweets" style="min-height: 300px; width: 100%;" class="pre-scrollable">
+                        <ul class="list-group">
+                            <li class="list-group-item" x-ng-repeat="tweet in candidateCtrl.tweets">
+                                <a href="https://twitter.com/x/status/{{ tweet.twitter_ident }}" target="_blank"
+                                   style="color: #000; text-decoration: none;">
+                                    <span x-ng-bind-html="candidateCtrl.tweetContent(tweet)"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <h3 class="text-center">Latest Tweets</h3>
+                </div>
+            </div>
+            <div class="col-md-6" x-ng-if="candidateCtrl.feelsReady">
                 <div class="card">
-                    <div class="panel-group" id="em_accordion" role="tablist" aria-multiselectable="true">
+                    <div id="emotions" style="min-height: 300px; width: 100%;"></div>
+                    <h3 class="text-center">Emotions Chart</h3>
+                </div>
+                <div class="card">
+                    <div class="panel-group" id="em_accordion" role="tablist" aria-multiselectable="true" style="min-height: 350px; width: 100%;">
                         <div class="panel panel-default" x-ng-repeat="feel in candidateCtrl.feels">
                             <div class="panel-heading" role="tab" id="feelsHeading{{ $index }}">
                                 <h4 class="panel-title">
-                                    <a role="button" data-toggle="collapse" data-parent="#em_accordion" href="#feelsGroup{{ $index }}" aria-expanded="{{ $index == 0 }}" aria-controls="feelsGroup{{ $index }}" onclick="return false">
-                                        <strong>{{ feel.feels }}</strong>
+                                    <a role="button" data-toggle="collapse" data-parent="#em_accordion"
+                                       href="#feelsGroup{{ $index }}" aria-expanded="{{ $index == 0 }}"
+                                       aria-controls="feelsGroup{{ $index }}" onclick="return false">
+                                        <strong class="text-capitalize">{{ feel.feels }}</strong>
                                     </a>
                                 </h4>
                             </div>
-                            <div id="feelsGroup{{ $index }}" class="panel-collapse collapse {{ $index == 90 ? 'in' :'' }}" role="tabpanel" aria-labelledby="feelsGroup{{ $index }}">
+                            <div id="feelsGroup{{ $index }}"
+                                 class="panel-collapse collapse {{ $index == 90 ? 'in' :'' }}" role="tabpanel"
+                                 aria-labelledby="feelsGroup{{ $index }}">
                                 <ul class="list-group">
                                     <li class="list-group-item" x-ng-repeat="tweet in feel.tweets">
-                                        <span class="sparkline" data-val="[{{ tweet.feels_anger }}, {{ tweet.feels_disgust }}, {{ tweet.feels_fear }}, {{ tweet.feels_joy }}, {{ tweet.feels_sadness }}]"></span>
-                                        <a href="https://twitter.com/x/status/{{ tweet.twitter_ident }}" target="_blank" style="color: #000; text-decoration: none;">
+                                        <span class="sparkline"
+                                              data-val="[{{ tweet.feels_anger }}, {{ tweet.feels_disgust }}, {{ tweet.feels_fear }}, {{ tweet.feels_joy }}, {{ tweet.feels_sadness }}]"></span>
+                                        <a href="https://twitter.com/x/status/{{ tweet.twitter_ident }}" target="_blank"
+                                           style="color: #000; text-decoration: none;">
                                             <span x-ng-bind-html="candidateCtrl.tweetContent(tweet)"></span>
                                         </a>
                                     </li>

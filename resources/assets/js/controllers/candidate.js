@@ -24,6 +24,7 @@ angular.module('kandidata')
             vm.candidate = session.getCandidates();
             vm.sentimentsReady = false;
             vm.feelsReady = false;
+            vm.tweetsReady = false;
             vm.keywordsReady = false;
 
             vm.tweetContent = function(tweet) {
@@ -40,9 +41,18 @@ angular.module('kandidata')
                     prepareSentiments();
                     prepareEmotions();
                     prepareKeywords();
+                    prepareTweets();
                 } else {
                     $state.go('home');
                 }
+            }
+
+            function prepareTweets() {
+                api.getTweets($stateParams.id)
+                    .then(function (response) {
+                        vm.tweetsReady = true;
+                        vm.tweets = response.data.data;
+                    });
             }
 
             function prepareSentiments() {
